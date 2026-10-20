@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5f3ee">
+<title>Portfolio — Creative Designer</title>
+<style>
+:root{
+  --paper:#f5f3ee; --ink:#25251f; --muted:#8c8a82; --line:rgba(40,38,31,.12);
+  --accent:#b7c6a4; --card:#fffefa; --shadow:0 22px 55px rgba(54,48,35,.13),0 3px 10px rgba(54,48,35,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;overflow-x:hidden}
+button,a{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible{outline:2px solid #7c8e67;outline-offset:4px}
+.site-shell{max-width:1440px;margin:auto;min-height:100vh;padding:0 5.4vw}
+.topbar{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:650;letter-spacing:.01em}
+.brand-mark{width:9px;height:9px;border-radius:50%;background:#d99d78;box-shadow:0 0 0 4px rgba(217,157,120,.13)}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.2em;font-weight:500;margin-top:3px}
+.nav{display:flex;align-items:center;gap:30px;font-size:11px;color:#6d6b64}
+.nav a{transition:color .2s}.nav a:hover{color:#222}
+.lang-btn{border:1px solid var(--line);background:rgba(255,255,255,.5);padding:8px 12px;border-radius:99px;font-size:10px;cursor:pointer;transition:.2s}
+.lang-btn:hover{background:#fff}
+.menu-btn{display:none;border:0;background:transparent;font-size:22px;cursor:pointer}
+.hero{padding-top:47px;position:relative}
+.hero-top{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+.eyebrow{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#96938a;margin:0 0 12px}
+h1{font-size:clamp(38px,5vw,65px);line-height:.98;letter-spacing:-.065em;font-weight:560;margin:0}
+h1 span{color:#aaa79d;font-weight:400}
+.intro{font-size:11px;line-height:1.9;color:#858279;max-width:245px;margin:0 0 3px}
+.stage{height:440px;position:relative;margin-top:14px;perspective:1200px;display:flex;align-items:center;justify-content:center;touch-action:pan-y;user-select:none}
+.stage:before{content:"";position:absolute;inset:8% 8% 3%;background:radial-gradient(ellipse at center,rgba(224,220,208,.44),transparent 65%);pointer-events:none}
+.project-card{position:absolute;width:clamp(185px,22vw,275px);height:clamp(238px,28vw,335px);border-radius:15px;background:var(--card);overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.8);cursor:pointer;transform-origin:center 80%;transition:transform .72s cubic-bezier(.2,.75,.2,1),opacity .55s,filter .55s,box-shadow .35s;will-change:transform;outline:none}
+.project-card:hover{box-shadow:0 28px 60px rgba(54,48,35,.18),0 5px 12px rgba(54,48,35,.07)}
+.project-card .art{height:calc(100% - 44px);position:relative;overflow:hidden;display:grid;place-items:center}
+.project-card .meta{height:44px;padding:10px 13px;display:flex;align-items:center;justify-content:space-between;background:#fffefa;font-size:10px}
+.meta .type{font-size:8px;color:#9b988f;letter-spacing:.04em}
+.card-index{font-size:9px;color:#99968e}
+.project-card .art:after{content:"";position:absolute;inset:0;background:linear-gradient(140deg,rgba(255,255,255,.17),transparent 40%,rgba(45,35,20,.04));pointer-events:none}
+.card-0 .art{background:#dce2d2}
+.card-1 .art{background:#efc7b7}
+.card-2 .art{background:#e6b4c3}
+.card-3 .art{background:#f1e2b7}
+.card-4 .art{background:#c9d9df}
+.card-5 .art{background:#e8d7c8}
+.card-6 .art{background:#d8cce7}
+.art-label{position:absolute;top:15px;left:15px;font-size:8px;letter-spacing:.12em;text-transform:uppercase;z-index:2;color:rgba(40,35,30,.62)}
+.art-number{position:absolute;bottom:13px;right:15px;font-size:9px;z-index:2;color:rgba(40,35,30,.62)}
+/* Custom artwork */
+.ceramic{width:78%;height:68%;position:relative;display:flex;align-items:center;justify-content:center;gap:9px}
+.vase{position:relative;width:32%;height:57%;border-radius:40% 40% 27% 27% / 23% 23% 17% 17%;background:linear-gradient(110deg,#fff7e7,#d8c5a9 75%,#b49d7f);box-shadow:inset -8px -5px 12px rgba(103,75,48,.12),inset 5px 3px 8px rgba(255,255,255,.85),0 15px 18px #7b806d33}
+.vase:before{content:"";position:absolute;width:42%;height:23%;top:-9%;left:29%;border-radius:30% 30% 20% 20%;background:linear-gradient(90deg,#cbb798,#f9ecd6,#c7b18f)}
+.vase.v2{height:78%;width:37%;background:linear-gradient(110deg,#fff5e2,#d8b99c 75%,#a7856e);transform:translateY(-4px)}
+.vase.v3{height:42%;width:26%;background:linear-gradient(110deg,#f8e3d9,#d6a99a 75%,#ae7e73);transform:translateY(16px)}
+.stem{position:absolute;width:2px;height:46%;background:#6d8b64;top:1%;left:49%;transform:rotate(-17deg);transform-origin:bottom}
+.leaf{position:absolute;width:30px;height:13px;background:#78946d;border-radius:100% 0 100% 0;top:7%;left:40%;transform:rotate(-25deg)}
+.leaf.l2{top:20%;left:55%;transform:rotate(28deg) scale(.8)}
+.podium{position:absolute;bottom:7%;width:100%;height:18%;border-radius:7px;background:linear-gradient(90deg,#e8d4bc,#fff0d9,#d4bca3);box-shadow:0 13px 20px #4b45351b}
+.poster{width:73%;height:72%;background:#fff0d9;box-shadow:9px 14px 22px #69462b27;transform:rotate(-4deg);position:relative;padding:15px;display:flex;flex-direction:column;justify-content:space-between}
+.poster .sun{width:73px;height:73px;border-radius:50%;background:#e58b52;position:absolute;right:13px;top:17px}
+.poster .mountain{position:absolute;bottom:0;left:0;width:100%;height:48%;background:#bd6e55;clip-path:polygon(0 100%,0 65%,25% 18%,47% 58%,65% 4%,100% 65%,100% 100%)}
+.poster .mountain.m2{height:34%;background:#3d635a;clip-path:polygon(0 100%,0 70%,29% 25%,55% 67%,77% 12%,100% 62%,100% 100%)}
+.poster strong{position:relative;z-index:2;font-size:19px;line-height:.95;letter-spacing:-.08em;color:#30483e}
+.poster small{z-index:2;position:relative;font-size:6px;letter-spacing:.2em;color:#6f6a53}
+.phone{width:45%;height:77%;border:5px solid #353a37;border-radius:22px;background:#fbf4e8;box-shadow:12px 16px 22px #34382b36;position:relative;overflow:hidden;transform:rotate(5deg)}
+.phone:before{content:"";position:absolute;top:5px;left:35%;width:30%;height:7px;border-radius:9px;background:#353a37;z-index:2}
+.phone-head{margin:22px 10px 8px;font-size:8px;font-weight:700}
+.phone-circle{height:85px;width:85px;border-radius:50%;margin:9px auto;background:linear-gradient(135deg,#e9b9a3,#f5d7bc);position:relative}
+.phone-circle:after{content:"";position:absolute;width:42px;height:52px;border-radius:50% 50% 43% 43%;background:#f9e9d7;left:22px;top:19px;box-shadow:inset -4px -3px 4px #d1ad91}
+.phone-bars{margin:14px 11px}.phone-bars i{display:block;height:5px;border-radius:5px;background:#ddd5c8;margin:6px 0}.phone-bars i:nth-child(2){width:65%}.phone-btn{margin:10px auto;width:65%;height:19px;border-radius:7px;background:#80927c}
+.orb-scene{width:100%;height:100%;position:relative;display:grid;place-items:center}
+.orb{position:absolute;border-radius:50%;box-shadow:inset -13px -15px 22px #00000013,inset 9px 7px 18px #ffffffa3,0 19px 25px #4c3d321f}
+.orb.o1{width:118px;height:118px;background:radial-gradient(circle at 30% 23%,#fff2d4,#e4a3a0 62%,#bd7d81);left:17%;top:24%}
+.orb.o2{width:84px;height:84px;background:radial-gradient(circle at 30% 23%,#fff5c8,#f2c56e 62%,#c28e50);right:14%;top:42%}
+.orb.o3{width:56px;height:56px;background:radial-gradient(circle at 30% 23%,#fff,#b8c9b4 62%,#80957e);left:38%;bottom:14%}
+.spark{position:absolute;color:#fff8df;font-size:24px}
+.room{position:relative;width:80%;height:75%;background:#f8e9d6;border:8px solid #f8f1e7;box-shadow:0 13px 23px #6b514022}
+.room:before{content:"";position:absolute;left:8%;right:8%;top:10%;height:47%;background:repeating-linear-gradient(90deg,#d3a77e 0 2px,transparent 2px 27px),#f0d7b7;border:3px solid #d5b18d}
+.room:after{content:"";position:absolute;left:20%;bottom:8%;width:60%;height:27%;background:#b78062;border-radius:4px 4px 0 0;box-shadow:0 -7px 0 #d4a98d}
+.plant{position:absolute;bottom:16%;left:10%;width:5px;height:80px;background:#687f5f;transform:rotate(-8deg);z-index:2}
+.plant:before,.plant:after{content:"";position:absolute;width:28px;height:12px;border-radius:100% 0 100% 0;background:#829d76;top:9px;left:-22px;transform:rotate(-20deg);box-shadow:18px 17px 0 #829d76}
+.plant:after{left:0;top:32px;transform:rotate(25deg) scale(.8)}
+.grid-art{width:75%;height:70%;display:grid;grid-template-columns:1fr 1fr;gap:7px;transform:rotate(-5deg)}
+.grid-art span{border-radius:5px;background:#f9f1df;box-shadow:0 7px 13px #4b3b2d20;position:relative;overflow:hidden}
+.grid-art span:nth-child(2){background:#8b9d86}.grid-art span:nth-child(3){background:#d78d74}.grid-art span:nth-child(4){background:#ead09a}
+.grid-art span:after{content:"";position:absolute;width:45px;height:45px;border-radius:50%;background:#ffffff70;top:20%;left:20%;box-shadow:13px 24px 0 #ffffff30}
+.controls{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:-2px}
+.circle-btn{width:31px;height:31px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.62);display:grid;place-items:center;cursor:pointer;transition:transform .2s,background .2s;font-size:15px}
+.circle-btn:hover{background:white;transform:scale(1.06)}
+.track{height:3px;width:min(220px,32vw);background:#dfddd5;border-radius:10px;overflow:hidden;margin:0 4px}
+.track-fill{height:100%;width:14.285%;background:#9a9a87;border-radius:10px;transition:width .5s}
+.current-label{font-size:9px;min-width:95px;color:#6f6d64}
+.current-label b{display:block;color:#34332e;font-size:10px;font-weight:600;margin-bottom:4px}
+.current-label span{color:#9a978e;font-size:8px}
+.view-all{font-size:9px;border:1px solid var(--line);background:#fffdf8;border-radius:99px;padding:8px 13px;cursor:pointer;transition:.2s}
+.view-all:hover{background:#e8eadf}
+.hint{text-align:center;color:#aaa69b;font-size:8px;letter-spacing:.12em;margin-top:19px}
+.scroll-note{position:absolute;right:0;top:360px;writing-mode:vertical-rl;font-size:8px;letter-spacing:.2em;color:#aaa69b;display:flex;gap:12px;align-items:center}
+.scroll-note:before{content:"";height:35px;width:1px;background:#d1cec3}
+.section{padding:120px 0 95px;border-top:1px solid var(--line);margin-top:80px}
+.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;margin-bottom:35px}
+.section-heading h2{font-size:clamp(29px,4vw,44px);letter-spacing:-.055em;font-weight:500;margin:0}
+.section-heading p{font-size:11px;line-height:1.8;color:#8d8a81;max-width:300px;margin:0}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.filter{border:1px solid var(--line);border-radius:99px;background:transparent;padding:8px 13px;font-size:10px;color:#77746b;cursor:pointer;transition:.2s}
+.filter.active,.filter:hover{background:#2d3028;color:#fff;border-color:#2d3028}
+.work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.work-tile{border:0;text-align:left;background:transparent;padding:0;cursor:pointer;min-width:0;transition:transform .25s}
+.work-tile:hover{transform:translateY(-5px)}
+.tile-art{height:clamp(180px,24vw,310px);border-radius:11px;display:grid;place-items:center;overflow:hidden;position:relative;box-shadow:0 7px 20px #433d2f0b}
+.tile-art .mini-art{transform:scale(.82);transition:transform .45s}
+.work-tile:hover .mini-art{transform:scale(.9) rotate(-2deg)}
+.tile-info{display:flex;justify-content:space-between;gap:10px;padding:14px 2px 5px}
+.tile-info strong{font-size:12px;font-weight:550}
+.tile-info small{display:block;font-size:9px;color:#99968d;margin-top:5px}
+.tile-index{font-size:9px;color:#aaa69c;padding-top:2px}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:10vw;align-items:start}
+.about-copy{font-size:clamp(20px,2.8vw,31px);line-height:1.45;letter-spacing:-.035em;max-width:600px}
+.about-copy em{font-style:normal;color:#a4a194}
+.about-side{font-size:11px;color:#817e75;line-height:2;max-width:330px}
+.skills{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.skills span{font-size:9px;border:1px solid var(--line);border-radius:99px;padding:7px 10px;color:#6f6c63}
+.contact{padding:75px 0 40px;border-top:1px solid var(--line);margin-top:30px}
+.contact-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:30px}
+.contact h2{font-size:clamp(38px,6vw,78px);line-height:.95;letter-spacing:-.07em;font-weight:500;margin:0 0 17px}
+.contact p{font-size:11px;color:#89867d;line-height:1.8}
+.contact-link{display:inline-flex;align-items:center;gap:18px;border-bottom:1px solid #8f8c80;padding:12px 0;font-size:12px;transition:gap .2s}
+.contact-link:hover{gap:25px}
+.footer{border-top:1px solid var(--line);padding:20px 0 25px;display:flex;justify-content:space-between;font-size:9px;color:#a09c92}
+.modal{position:fixed;inset:0;background:rgba(28,29,25,.36);backdrop-filter:blur(10px);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex;animation:fadeIn .25s ease}
+.modal-panel{width:min(800px,100%);max-height:90vh;overflow:auto;background:#f8f6f0;border-radius:18px;box-shadow:0 25px 90px #2223;position:relative;display:grid;grid-template-columns:1fr 1fr}
+.modal-art{min-height:360px;display:grid;place-items:center;border-radius:18px 0 0 18px;overflow:hidden}
+.modal-content{padding:42px 34px;align-self:center}
+.modal-content .eyebrow{margin-bottom:18px}
+.modal-content h3{font-size:30px;letter-spacing:-.05em;font-weight:500;margin:0 0 12px}
+.modal-content p{font-size:12px;line-height:1.9;color:#77746b}
+.modal-close{position:absolute;top:15px;right:15px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#fffdf6;cursor:pointer;z-index:2}
+.modal-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:22px}
+.modal-tags span{border:1px solid var(--line);border-radius:99px;padding:7px 10px;font-size:9px;color:#77746b}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(min-width:1200px){.stage{height:475px}}
+@media(max-width:760px){
+ .site-shell{padding:0 22px}.topbar{height:70px}.nav{gap:15px}.nav a{display:none}.menu-btn{display:block}
+ .hero{padding-top:36px}.hero-top{align-items:flex-start;flex-direction:column;gap:18px}.intro{max-width:320px}
+ .stage{height:360px;margin-top:0}.project-card{width:clamp(155px,44vw,225px);height:clamp(210px,59vw,290px)}
+ .scroll-note{display:none}.controls{gap:8px}.track{width:18vw}.current-label{min-width:76px}.view-all{padding:8px 10px}
+ .section{padding:80px 0 65px;margin-top:58px}.section-heading{align-items:flex-start;flex-direction:column}.work-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 13px}
+ .tile-art{height:clamp(150px,38vw,250px)}.about-layout{grid-template-columns:1fr;gap:24px}.contact-inner{align-items:flex-start;flex-direction:column}.modal-panel{grid-template-columns:1fr;max-width:480px}.modal-art{min-height:230px;border-radius:18px 18px 0 0}.modal-content{padding:28px}.modal-content h3{font-size:25px}
+}
+@media(max-width:420px){.site-shell{padding:0 17px}.nav{gap:9px}.stage{height:315px}.project-card{width:160px;height:215px}.work-grid{gap:18px 10px}.tile-art{height:150px}.controls{gap:6px}.current-label{min-width:70px}.track{width:15vw}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="site-shell">
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Portfolio home"><span class="brand-mark"></span><span><span data-zh="林间设计" data-en="STUDIO LIN">林间设计</span><small>INDEPENDENT DESIGNER</small></span></a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#works" data-zh="作品" data-en="WORKS">作品</a>
+      <a href="#about" data-zh="关于" data-en="ABOUT">关于</a>
+      <a href="#contact" data-zh="联系" data-en="CONTACT">联系</a>
+      <button class="lang-btn" id="langToggle" aria-label="Switch language">EN / 中</button>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-top">
+        <div><p class="eyebrow" data-zh="精选作品 · 2022—2026" data-en="SELECTED WORKS · 2022—2026">精选作品 · 2022—2026</p>
+          <h1 data-zh="设计，让想法<br><span>变得可触摸。</span>" data-en="Ideas made<br><span>to be felt.</span>">设计，让想法<br><span>变得可触摸。</span></h1></div>
+        <p class="intro" data-zh="你好，我是一名独立设计师。<br>在品牌、数字体验与视觉实验之间，寻找恰到好处的表达。" data-en="Hello, I'm an independent designer exploring the space between identity, digital experiences and visual experiments.">你好，我是一名独立设计师。<br>在品牌、数字体验与视觉实验之间，寻找恰到好处的表达。</p>
+      </div>
+
+      <div class="stage" id="stage" aria-label="Interactive project carousel">
+        <article class="project-card card-0" data-project="0" tabindex="0" role="button" aria-label="Open project Soft Objects"><div class="art"><span class="art-label">FORM / OBJECT</span><div class="ceramic"><div class="podium"></div><div class="vase v1"><i class="stem"></i><i class="leaf"></i><i class="leaf l2"></i></div><div class="vase v2"></div><div class="vase v3"></div></div><span class="art-number">01</span></div><div class="meta"><span data-zh="柔软物件" data-en="Soft Objects">柔软物件</span><span class="type">OBJECT</span></div></article>
+        <article class="project-card card-1" data-project="1" tabindex="0" role="button" aria-label="Open project Small Rituals"><div class="art"><span class="art-label">BRAND / STORY</span><div class="poster"><span class="sun"></span><strong>SMALL<br>RITUALS</strong><small>MAKE ROOM FOR SLOW</small><span class="mountain"></span><span class="mountain m2"></span></div><span class="art-number">02</span></div><div class="meta"><span data-zh="微小仪式" data-en="Small Rituals">微小仪式</span><span class="type">IDENTITY</span></div></article>
+        <article class="project-card card-2" data-project="2" tabindex="0" role="button" aria-label="Open project Daylight"><div class="art"><span class="art-label">DIGITAL / UI</span><div class="phone"><div class="phone-head">daylight ☼</div><div class="phone-circle"></div><div class="phone-bars"><i></i><i></i><i></i></div><div class="phone-btn"></div></div><span class="art-number">03</span></div><div class="meta"><span data-zh="日光计划" data-en="Daylight">日光计划</span><span class="type">DIGITAL</span></div></article>
+        <article class="project-card card-3" data-project="3" tabindex="0" role="button" aria-label="Open project Playful Matter"><div class="art"><span class="art-label">3D / EXPERIMENT</span><div class="orb-scene"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><span class="spark" style="left:20%;top:18%">✳</span><span class="spark" style="right:17%;bottom:16%">✦</span></div><span class="art-number">04</span></div><div class="meta"><span data-zh="玩趣物质" data-en="Playful Matter">玩趣物质</span><span class="type">3D / ART</span></div></article>
+        <article class="project-card card-4" data-project="4" tabindex="0" role="button" aria-label="Open project Quiet Corner"><div class="art"><span class="art-label">SPACE / CONCEPT</span><div class="room"><i class="plant"></i></div><span class="art-number">05</span></div><div class="meta"><span data-zh="安静一角" data-en="Quiet Corner">安静一角</span><span class="type">SPATIAL</span></div></article>
+        <article class="project-card card-5" data-project="5" tabindex="0" role="button" aria-label="Open project Form Studies"><div class="art"><span class="art-label">VISUAL / SYSTEM</span><div class="grid-art"><span></span><span></span><span></span><span></span></div><span class="art-number">06</span></div><div class="meta"><span data-zh="形态研究" data-en="Form Studies">形态研究</span><span class="type">VISUAL</span></div></article>
+        <article class="project-card card-6" data-project="6" tabindex="0" role="button" aria-label="Open project Sunday Notes"><div class="art"><span class="art-label">EDITORIAL / PRINT</span><div class="poster" style="background:#f2eaf8;transform:rotate(5deg)"><span class="sun" style="background:#b4a0d0;left:16px;right:auto;top:45px"></span><strong style="color:#4f4763;margin-top:70px">SUNDAY<br>NOTES</strong><small>VOL. 06 — TAKE IT EASY</small><span class="mountain" style="background:#a4b3a0"></span><span class="mountain m2" style="background:#7d8b99"></span></div><span class="art-number">07</span></div><div class="meta"><span data-zh="星期日手记" data-en="Sunday Notes">星期日手记</span><span class="type">EDITORIAL</span></div></article>
+      </div>
+
+      <div class="controls">
+        <button class="circle-btn" id="prevBtn" aria-label="Previous project">←</button>
+        <button class="circle-btn" id="nextBtn" aria-label="Next project">→</button>
+        <div class="current-label"><b id="currentTitle">柔软物件</b><span id="currentMeta">01 / 07 · OBJECT</span></div>
+        <div class="track" aria-hidden="true"><div class="track-fill" id="trackFill"></div></div>
+        <button class="view-all" id="viewAll" data-zh="浏览全部 ↗" data-en="VIEW ALL ↗">浏览全部 ↗</button>
+      </div>
+      <p class="hint" data-zh="拖动卡片 · 点击作品 · 使用方向键探索" data-en="DRAG TO EXPLORE · CLICK A PROJECT · USE ARROW KEYS">拖动卡片 · 点击作品 · 使用方向键探索</p>
+      <div class="scroll-note" data-zh="向下探索" data-en="SCROLL TO EXPLORE">向下探索</div>
+    </section>
+
+    <section class="section" id="works">
+      <div class="section-heading"><div><p class="eyebrow" data-zh="精选项目" data-en="THE COLLECTION">精选项目</p><h2 data-zh="不同媒介，同一种好奇。" data-en="Different mediums.<br>One curious mind.">不同媒介，同一种好奇。</h2></div><p data-zh="从品牌识别到数字产品，从实体物件到空间概念。每个项目，都是一次关于感受与功能的探索。" data-en="From brand identities to digital products, physical objects to spatial concepts — each project explores the meeting point of feeling and function.">从品牌识别到数字产品，从实体物件到空间概念。每个项目，都是一次关于感受与功能的探索。</p></div>
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="all" data-zh="全部作品" data-en="ALL WORK">全部作品</button>
+        <button class="filter" data-filter="brand" data-zh="品牌视觉" data-en="BRANDING">品牌视觉</button>
+        <button class="filter" data-filter="digital" data-zh="数字体验" data-en="DIGITAL">数字体验</button>
+        <button class="filter" data-filter="art" data-zh="艺术实验" data-en="ART & OBJECT">艺术实验</button>
+        <button class="filter" data-filter="space" data-zh="空间概念" data-en="SPATIAL">空间概念</button>
+      </div>
+      <div class="work-grid" id="workGrid">
+        <button class="work-tile" data-project="0" data-category="art"><div class="tile-art card-0"><div class="ceramic mini-art"><div class="podium"></div><div class="vase v1"></div><div class="vase v2"></div><div class="vase v3"></div></div></div><div class="tile-info"><span><strong data-zh="柔软物件" data-en="Soft Objects">柔软物件</strong><small data-zh="器物设计 / 2026" data-en="Object Design / 2026">器物设计 / 2026</small></span><span class="tile-index">01 ↗</span></div></button>
+        <button class="work-tile" data-project="1" data-category="brand"><div class="tile-art card-1"><div class="poster mini-art"><span class="sun"></span><strong>SMALL<br>RITUALS</strong><small>MAKE ROOM FOR SLOW</small><span class="mountain"></span><span class="mountain m2"></span></div></div><div class="tile-info"><span><strong data-zh="微小仪式" data-en="Small Rituals">微小仪式</strong><small data-zh="品牌识别 / 2025" data-en="Brand Identity / 2025">品牌识别 / 2025</small></span><span class="tile-index">02 ↗</span></div></button>
+        <button class="work-tile" data-project="2" data-category="digital"><div class="tile-art card-2"><div class="phone mini-art"><div class="phone-head">daylight ☼</div><div class="phone-circle"></div><div class="phone-bars"><i></i><i></i><i></i></div><div class="phone-btn"></div></div></div><div class="tile-info"><span><strong data-zh="日光计划" data-en="Daylight">日光计划</strong><small data-zh="产品设计 / 2025" data-en="Product Design / 2025">产品设计 / 2025</small></span><span class="tile-index">03 ↗</span></div></button>
+        <button class="work-tile" data-project="3" data-category="art"><div class="tile-art card-3"><div class="orb-scene mini-art"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div></div><div class="tile-info"><span><strong data-zh="玩趣物质" data-en="Playful Matter">玩趣物质</strong><small data-zh="3D 实验 / 2024" data-en="3D Experiment / 2024">3D 实验 / 2024</small></span><span class="tile-index">04 ↗</span></div></button>
+        <button class="work-tile" data-project="4" data-category="space"><div class="tile-art card-4"><div class="room mini-art"><i class="plant"></i></div></div><div class="tile-info"><span><strong data-zh="安静一角" data-en="Quiet Corner">安静一角</strong><small data-zh="空间概念 / 2024" data-en="Spatial Concept / 2024">空间概念 / 2024</small></span><span class="tile-index">05 ↗</span></div></button>
+        <button class="work-tile" data-project="5" data-category="brand"><div class="tile-art card-5"><div class="grid-art mini-art"><span></span><span></span><span></span><span></span></div></div><div class="tile-info"><span><strong data-zh="形态研究" data-en="Form Studies">形态研究</strong><small data-zh="视觉系统 / 2023" data-en="Visual System / 2023">视觉系统 / 2023</small></span><span class="tile-index">06 ↗</span></div></button>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-heading"><div><p class="eyebrow" data-zh="关于我" data-en="A LITTLE ABOUT ME">关于我</p><h2 data-zh="保持好奇，保持柔软。" data-en="Stay curious.<br>Stay soft.">保持好奇，保持柔软。</h2></div></div>
+      <div class="about-layout">
+        <div class="about-copy" data-zh="我相信好的设计不必大声。它可以像日常里的一束光，<em>轻轻地改变感受，也悄悄地解决问题。</em>" data-en="I believe good design doesn't need to shout. Like a little ray of light in everyday life, it can <em>quietly shift how we feel — and solve something meaningful.</em>">我相信好的设计不必大声。它可以像日常里的一束光，<em>轻轻地改变感受，也悄悄地解决问题。</em></div>
+        <div class="about-side"><p data-zh="我以开放的视角连接策略、视觉与体验，喜欢在理性的结构中留一点意外，在精确的细节里找到温度。这个页面是我的小小工作室，也是持续更新的灵感档案。" data-en="I connect strategy, visuals and experience with an open mind. I like leaving room for surprise inside a clear structure, and finding warmth in precise details. This page is both my little studio and an evolving archive of ideas.">我以开放的视角连接策略、视觉与体验，喜欢在理性的结构中留一点意外，在精确的细节里找到温度。这个页面是我的小小工作室，也是持续更新的灵感档案。</p><div class="skills"><span>Art Direction</span><span>Brand Identity</span><span>UI / UX</span><span>3D & Motion</span><span>Editorial</span><span>Creative Coding</span></div></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact"><div class="contact-inner"><div><p class="eyebrow" data-zh="一起做点好玩的" data-en="HAVE A GOOD PROJECT?">一起做点好玩的</p><h2 data-zh="让我们创造<br>一点新东西。" data-en="Let's make<br>something matter.">让我们创造<br>一点新东西。</h2><p data-zh="开放合作 · 品牌、数字体验与创意项目" data-en="Available for select collaborations · Identity, digital and creative projects">开放合作 · 品牌、数字体验与创意项目</p></div><div><a class="contact-link" href="mailto:hello@example.com"><span data-zh="给我写封邮件" data-en="SAY HELLO">给我写封邮件</span><span>↗</span></a><p style="font-size:9px;color:#aaa69b;margin-top:12px">hello@example.com · Replace with your email</p></div></div></section>
+  </main>
+  <footer class="footer"><span>© 2026 STUDIO LIN — PORTFOLIO CONCEPT</span><span data-zh="用好奇心制作 ♥" data-en="MADE WITH CURIOSITY ♥">用好奇心制作 ♥</span></footer>
+</div>
+
+<div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-panel"><button class="modal-close" id="modalClose" aria-label="Close project details">×</button><div class="modal-art" id="modalArt"></div><div class="modal-content"><p class="eyebrow" id="modalEyebrow">SELECTED PROJECT</p><h3 id="modalTitle">Soft Objects</h3><p id="modalDescription"></p><div class="modal-tags" id="modalTags"></div></div></div>
+</div>
+
+<script>
+(() => {
+  const projects = [
+    {zh:"柔软物件",en:"Soft Objects",type:"OBJECT",year:"2026",category:"art",descZh:"一组关于日常器物与触感的设计实验。通过柔和的轮廓、温润的材质和克制的色彩，让物件成为生活里安静而亲切的存在。",descEn:"An exploration of everyday objects and tactility. Soft silhouettes, warm materials and a restrained palette make these pieces feel quietly at home in daily life.",tags:["Object Design","Material Study","Art Direction"]},
+    {zh:"微小仪式",en:"Small Rituals",type:"IDENTITY",year:"2025",category:"brand",descZh:"为一个倡导慢生活的生活方式品牌建立视觉识别。用自然色彩、友善的字形和灵活的图形系统，把平凡日常变成值得期待的小仪式。",descEn:"A visual identity for a slow-living brand. Earthy colors, friendly typography and a flexible graphic system turn ordinary routines into small rituals worth looking forward to.",tags:["Brand Identity","Packaging","Visual System"]},
+    {zh:"日光计划",en:"Daylight",type:"DIGITAL",year:"2025",category:"digital",descZh:"一款帮助用户建立轻盈生活习惯的数字产品概念。从柔和的界面节奏到清晰的交互路径，让自我照顾变得简单而不费力。",descEn:"A digital product concept for building lighter daily habits. A gentle interface rhythm and clear interaction paths make self-care feel simple and effortless.",tags:["Product Design","UI / UX","Prototype"]},
+    {zh:"玩趣物质",en:"Playful Matter",type:"3D / ART",year:"2024",category:"art",descZh:"以圆润形体、柔软光线与半透明质感为起点的 3D 视觉实验。探索数字材质如何传递真实的触感与情绪。",descEn:"A 3D visual experiment built around rounded forms, soft light and translucent surfaces, exploring how digital materials can convey tactile feeling and emotion.",tags:["3D","Visual Experiment","Motion"]},
+    {zh:"安静一角",en:"Quiet Corner",type:"SPATIAL",year:"2024",category:"space",descZh:"一个微型休憩空间概念。以温暖的木色、自然光与植物作为线索，在忙碌的城市环境里留出一个可以慢下来的角落。",descEn:"A small retreat concept using warm timber, natural light and plants to create a place to slow down inside a busy urban environment.",tags:["Spatial Concept","Interior","Research"]},
+    {zh:"形态研究",en:"Form Studies",type:"VISUAL",year:"2023",category:"brand",descZh:"围绕基础几何形态展开的视觉系统研究，通过比例、色彩和组合规则，构建一套可延展的视觉语言。",descEn:"A visual system study based on basic geometric forms. Proportion, color and compositional rules create a visual language that can expand across applications.",tags:["Visual System","Graphic Design","Research"]},
+    {zh:"星期日手记",en:"Sunday Notes",type:"EDITORIAL",year:"2023",category:"brand",descZh:"一本关于慢节奏生活的独立出版物。将编辑式排版、手感纸张与轻松的图像组合在一起，留下适合反复翻阅的阅读体验。",descEn:"An independent publication about slower living, combining editorial typography, tactile paper and playful imagery into an object meant to be revisited.",tags:["Editorial","Print","Art Direction"]}
+  ];
+  const cards = [...document.querySelectorAll('.project-card')];
+  const stage = document.getElementById('stage');
+  const title = document.getElementById('currentTitle');
+  const meta = document.getElementById('currentMeta');
+  const fill = document.getElementById('trackFill');
+  let active = 2, language = 'zh', startX = 0, dragging = false, dragMoved = false;
+  const mod = (n, m) => ((n % m) + m) % m;
+  function renderCarousel(){
+    cards.forEach((card, i) => {
+      const offset = ((i - active + cards.length + Math.floor(cards.length/2)) % cards.length) - Math.floor(cards.length/2);
+      const abs = Math.abs(offset);
+      const x = offset * (window.innerWidth < 760 ? 74 : 105);
+      const y = abs * (window.innerWidth < 760 ? 8 : 11) + (offset === 0 ? -3 : 8);
+      const scale = offset === 0 ? 1 : Math.max(.69, 1 - abs * .105);
+      const rotate = offset * (window.innerWidth < 760 ? 3.5 : 4.5);
+      card.style.transform = `translate3d(${x}px,${y}px,${-abs*80}px) rotate(${rotate}deg) scale(${scale})`;
+      card.style.zIndex = String(20 - abs);
+      card.style.opacity = abs > 3 ? 0 : (abs === 3 ? .45 : 1);
+      card.style.filter = abs > 1 ? 'saturate(.78)' : 'none';
+      card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
+      card.setAttribute('aria-current', offset === 0 ? 'true' : 'false');
+    });
+    const p = projects[active];
+    title.textContent = language === 'zh' ? p.zh : p.en;
+    meta.textContent = `${String(active+1).padStart(2,'0')} / 07 · ${p.type}`;
+    fill.style.width = `${((active+1)/projects.length)*100}%`;
+  }
+  function move(n){active = mod(active+n, projects.length);renderCarousel()}
+  document.getElementById('prevBtn').addEventListener('click',()=>move(-1));
+  document.getElementById('nextBtn').addEventListener('click',()=>move(1));
+  cards.forEach((card,i)=>{
+    card.addEventListener('click',()=>{if(dragMoved){dragMoved=false;return} const offset = mod(i-active+3,7)-3; if(offset!==0){active=i;renderCarousel()}else openProject(i)});
+    card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();active=i;renderCarousel();openProject(i)}});
+  });
+  stage.addEventListener('pointerdown',e=>{startX=e.clientX;dragging=true;dragMoved=false;stage.setPointerCapture?.(e.pointerId)});
+  stage.addEventListener('pointerup',e=>{if(!dragging)return;const delta=e.clientX-startX;if(Math.abs(delta)>28){move(delta<0?1:-1);dragMoved=true}dragging=false;setTimeout(()=>dragMoved=false,80)});
+  stage.addEventListener('pointercancel',()=>dragging=false);
+  window.addEventListener('keydown',e=>{if(document.getElementById('projectModal').classList.contains('open')){if(e.key==='Escape')closeProject();return}if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1)});
+  window.addEventListener('resize',renderCarousel);
+
+  function setLanguage(lang){
+    language=lang;document.documentElement.lang=lang==='zh'?'zh-CN':'en';
+    document.querySelectorAll('[data-zh][data-en]').forEach(el=>{el.innerHTML=el.dataset[lang]});
+    document.getElementById('langToggle').textContent=lang==='zh'?'EN / 中':'中 / EN';
+    renderCarousel();
+  }
+  document.getElementById('langToggle').addEventListener('click',()=>setLanguage(language==='zh'?'en':'zh'));
+
+  const modal=document.getElementById('projectModal');
+  function openProject(i){
+    const p=projects[i];const card=cards[i];const art=card.querySelector('.art').cloneNode(true);
+    document.getElementById('modalArt').innerHTML='';document.getElementById('modalArt').appendChild(art);
+    document.getElementById('modalArt').style.background=getComputedStyle(card.querySelector('.art')).backgroundColor;
+    document.getElementById('modalEyebrow').textContent=`${p.type} · ${p.year} · ${String(i+1).padStart(2,'0')}`;
+    document.getElementById('modalTitle').textContent=language==='zh'?p.zh:p.en;
+    document.getElementById('modalDescription').textContent=language==='zh'?p.descZh:p.descEn;
+    document.getElementById('modalTags').innerHTML=p.tags.map(t=>`<span>${t}</span>`).join('');
+    modal.classList.add('open');document.body.style.overflow='hidden';document.getElementById('modalClose').focus();
+  }
+  function closeProject(){modal.classList.remove('open');document.body.style.overflow=''}
+  document.getElementById('modalClose').addEventListener('click',closeProject);
+  modal.addEventListener('click',e=>{if(e.target===modal)closeProject()});
+  document.getElementById('viewAll').addEventListener('click',()=>document.getElementById('works').scrollIntoView({behavior:'smooth'}));
+
+  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b===btn));
+    const filter=btn.dataset.filter;
+    document.querySelectorAll('.work-tile').forEach(tile=>{tile.hidden=filter!=='all'&&tile.dataset.category!==filter});
+  }));
+  document.getElementById('menuBtn').addEventListener('click',()=>{
+    const nav=document.querySelector('.nav');
+    const open=nav.dataset.open!=='true';nav.dataset.open=String(open);
+    if(open){nav.style.display='flex';nav.style.position='absolute';nav.style.top='62px';nav.style.right='0';nav.style.padding='16px';nav.style.background='#fbfaf6';nav.style.border='1px solid var(--line)';nav.style.borderRadius='12px';nav.style.boxShadow='0 12px 30px #3332';nav.style.flexDirection='column';nav.style.alignItems='flex-start';nav.querySelectorAll('a').forEach(a=>a.style.display='block')}
+    else{nav.removeAttribute('style');nav.querySelectorAll('a').forEach(a=>a.style.display='')}
+  });
+  document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>{if(window.innerWidth<=760){document.querySelector('.nav').removeAttribute('style');document.querySelector('.nav').querySelectorAll('a').forEach(link=>link.style.display='')}}));
+  setLanguage('zh');active=2;renderCarousel();
+})();
+</script>
+</body>
+</html>
